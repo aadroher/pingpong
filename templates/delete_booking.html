@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-xs-4">
+            <h3>
+                Cancelar reserva
+            </h3>
+
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">
+                            Día:
+                        </label>
+                        <div class="col-xs-9">
+                            <p class="form-control-static">
+                                {{ booking.time_slot.day }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">
+                            Hora:
+                        </label>
+                        <div class="col-xs-9">
+                            <p class="form-control-static">
+                                {{ booking.time_slot }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">
+                            Mesa:
+                        </label>
+                        <div class="col-xs-9">
+                            <p class="form-control-static">
+                                {{ booking.tennis_table }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">
+                            Nombre:
+                        </label>
+                        <div class="col-xs-9">
+                            <p class="form-control-static">
+                                {{ booking.booker.name }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">
+                            Email:
+                        </label>
+                        <div class="col-xs-9">
+                            <p class="form-control-static">
+                                {{ booking.booker.email }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">
+                            Notas:
+                        </label>
+                        <div class="col-xs-9">
+                            <p class="form-control-static">
+                                {{ booking.notes }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-3">
+                            {% with day=booking.time_slot.day %}
+                                <a class="btn btn-default"
+                                    href="{{ url_for('list_bookings',
+                                            year=day.date.year,
+                                            month=day.date.month,
+                                            day_num=day.date.day)
+                                        }}" >
+                                    <span class="glyphicon glyphicon-arrow-left"></span>
+                                    Volver
+                                </a>
+                            {% endwith %}
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="submit" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Cancelar reserva
+                            </button>
+                        </div>
+                      </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

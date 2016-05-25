@@ -1,0 +1,37 @@
+<nav>
+    <ul class="pagination">
+        <li>
+            {% with prev_day=day.week.prev_day  %}
+                <a href="{{ url_for('list_bookings',
+                                    year=prev_day.date.year,
+                                    month=prev_day.date.month,
+                                    day_num=prev_day.date.day)
+                        }}" aria-label="Previous">
+                    <span>&laquo;</span>
+                </a>
+            {% endwith %}
+        </li>
+        {% for week_day in day.week.days %}
+            <li class="{{ 'active' if week_day == day }}">
+                <a href="{{ url_for('list_bookings',
+                                    year=week_day.date.year,
+                                    month=week_day.date.month,
+                                    day_num=week_day.date.day)
+                        }}">
+                    {{ week_day.code }}
+                </a>
+            <li>
+        {% endfor %}
+        <li>
+            {% with next_day=day.week.next_day  %}
+                <a href="{{ url_for('list_bookings',
+                                    year=next_day.date.year,
+                                    month=next_day.date.month,
+                                    day_num=next_day.date.day)
+                        }}" aria-label="Previous">
+                    <span>&raquo;</span>
+                </a>
+            {% endwith %}
+        </li>
+    </ul>
+</nav>
