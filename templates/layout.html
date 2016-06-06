@@ -1,39 +1,44 @@
 <!doctype html>
 <html>
     <head>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
               integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-              crossorigin="anonymous">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+              crossorigin="anonymous"
+        />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        />
+        <style>
+            body { padding-top: 70px; }
+        </style>
         <title>
-            Ping Pong
+            ping~pong
         </title>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="/">
-                Ping Pong
-              </a>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <img src="/static/img/table_tennis_logo.png"
+                             height="24"/>
+                    </a>
+                </div>
             </div>
-          </div>
         </nav>
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <h1>
-                        Ping Pong
+                        ping~pong
                     </h1>
                     <p class="lead">
-                        ¡Reservad mesa a discreción!
+                        Gestión de reservas
                     </p>
                 </div>
             </div>
-            {% block body %}
+            {% block time_slots %}
             {% endblock %}
         </div>
     </body>

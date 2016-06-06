@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block time_slots %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>
+                Semana del 20/03/2552 al 26/03/2552
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <nav>
+                <ul class="pagination">
+                    <li>
+                      <a href="#" aria-label="Previous">
+                        <span>&laquo;</span>
+                      </a>
+                    </li>
+                    {% for week_day in week_days %}
+                        <li>
+                            <a href="#">
+                                {{ week_day }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    <li>
+                      <a href="#" aria-label="Previous">
+                        <span>&raquo;</span>
+                      </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            <table class="table table-responsive table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Mesa A
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for time_slot in time_slots %}
+                    <tr>
+                        <td class="success">
+                            {{ time_slot }}
+                            <a href="#" class="btn btn-primary btn-xs pull-right">
+                                <span class="glyphicon glyphicon-ok small">
+                                </span>
+
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
