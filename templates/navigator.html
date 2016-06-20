@@ -5,7 +5,7 @@
                 <a href="{{ url_for('list_bookings',
                                     year=prev_day.date.year,
                                     month=prev_day.date.month,
-                                    day_num=prev_day.date.day)
+                                    day=prev_day.date.day)
                         }}" aria-label="Previous">
                     <span>&laquo;</span>
                 </a>
@@ -16,7 +16,7 @@
                 <a href="{{ url_for('list_bookings',
                                     year=week_day.date.year,
                                     month=week_day.date.month,
-                                    day_num=week_day.date.day)
+                                    day=week_day.date.day)
                         }}">
                     {{ week_day.code }}
                 </a>
@@ -27,7 +27,7 @@
                 <a href="{{ url_for('list_bookings',
                                     year=next_day.date.year,
                                     month=next_day.date.month,
-                                    day_num=next_day.date.day)
+                                    day=next_day.date.day)
                         }}" aria-label="Previous">
                     <span>&raquo;</span>
                 </a>

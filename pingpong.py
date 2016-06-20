@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 
-from datetime import time
+from datetime import date
 from flask import Flask, render_template
+
+from pingpong.models.day import Day
+from pingpong.models import week
 
 # Configuración
 # True para el modo de depuración.
@@ -16,15 +19,25 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     """
-    Retorna una página estática inicial.
+    Obtiene el día correspondiente a hoy.
     """
-    days_of_week = ['l', 'm', 'x', 'j', 'v', 's', 'd']
+    today_date = date.today()
 
-    time_slots = [time(hour=n) for n in range(7, 24)]
+    return list_bookings(today_date.year,
+                         today_date.month,
+                         today_date.day)
 
-    return render_template('time_slots.html',
-                           week_days=days_of_week,
-                           time_slots=time_slots)
+
+@app.route('/bookings/<int:year>/<int:month>/<int:day>.html')
+def list_bookings(year, month, day):
+    """
+    Obtiene el día correspondiente a los parámetros definidos
+    en la URL.
+    """
+    day_date = date(year, month, day)
+    day_week = week.from_date(day_date)
+    day = Day(day_week, day_date)
+    return render_template('time_slots.html', day=day)
 
 
 if __name__ == '__main__':
