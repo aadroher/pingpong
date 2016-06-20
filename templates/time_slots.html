@@ -20,12 +20,13 @@
         </div>
     </div>
     <div class="row">
+        {% for table in ping_pong_tables %}
         <div class="col-xs-2">
             <table class="table table-responsive table-condensed table-hover">
                 <thead>
                     <tr>
                         <th>
-                            Mesa A
+                            Mesa {{ table }}
                         </th>
                     </tr>
                 </thead>
@@ -44,5 +45,6 @@
                 </tbody>
             </table>
         </div>
+        {% endfor %}
     </div>
 {% endblock %}
