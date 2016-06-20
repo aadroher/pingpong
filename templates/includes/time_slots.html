@@ -1,0 +1,24 @@
+<div class="col-xs-2">
+    <table class="table table-responsive table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Mesa {{ table }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for time_slot in day.time_slots %}
+            <tr>
+                <td class="success">
+                    {{ time_slot }}
+                    <a href="#" class="btn btn-primary btn-xs pull-right">
+                        <span class="glyphicon glyphicon-ok small">
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
-{% block body %}
-    {% with day = view_data.day_data.day %}
+{% block time_slots %}
     <div class="row">
         <div class="col-xs-12">
             <h4>
@@ -10,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-             {% include "navigator.html" %}
+             {% include "includes/navigator.html" %}
         </div>
     </div>
     <div class="row">
@@ -21,48 +20,8 @@
         </div>
     </div>
     <div class="row">
-        {% with tennis_tables_data = view_data.day_data.tennis_tables_data %}
-        {% for tennis_table_data in tennis_tables_data %}
-        <div class="col-xs-2">
-            <table class="table table-responsive table-condensed">
-                <thead>
-                    <tr>
-                        <th>
-                            Mesa {{ tennis_table_data.tennis_table }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for time_slot_data in tennis_table_data.time_slots %}
-                        {% with time_slot = time_slot_data.time_slot %}
-                            <tr>
-                                <td>
-                                    {% if time_slot_data.booking %}
-                                        <a class="btn btn-block btn-danger "
-                                           href="{{ url_for('delete_booking',
-                                                    pk=time_slot_data.booking.pk) }}">
-                                            {{ time_slot }}
-                                        </a>
-                                    {% else %}
-                                        <a class="btn btn-block btn-success "
-                                           href="{{ url_for('create_booking',
-                                                    year=day.date.year,
-                                                    month=day.date.month,
-                                                    day_num=day.date.day,
-                                                    time_url_str=time_slot.time_url_str,
-                                                    table_name=tennis_table_data.tennis_table.url_name) }}">
-                                        {{ time_slot }}
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endwith %}
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        {% for table in ping_pong_tables %}
+             {% include "includes/time_slots.html" %}
         {% endfor %}
-        {% endwith %}
     </div>
-    {% endwith %}
 {% endblock %}
