@@ -43,6 +43,18 @@ def list_bookings(year, month, day):
                            ping_pong_tables=get_ping_pong_tables())
 
 
+@app.route('/bookings/<int:year>/<int:month>/<int:day>/<time>/<table>.html')
+def create_booking(year, month, day, time, table):
+
+    day = Day(date(year, month, day))
+    time_slot = day.get_time_slot(time)
+    tennis_table = get_ping_pong_tables()(table)
+
+    return render_template('create_booking.html',
+                           time_slot=time_slot,
+                           table=tennis_table)
+
+
 if __name__ == '__main__':
     app.run(debug=DEBUG)
 

@@ -10,6 +10,11 @@ def get_ping_pong_tables():
     return [PingPongTable(name) for name in TABLES]
 
 
+def get_tennis_table(name):
+    return next(tennis_table for tennis_table in get_ping_pong_tables()
+                if tennis_table.name == name.upper())
+
+
 class PingPongTable:
     """
     Representa una mesa de ping pong.
