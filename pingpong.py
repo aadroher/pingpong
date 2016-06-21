@@ -85,7 +85,7 @@ def list_bookings(year, month, day):
            methods=['GET', 'POST'])
 def create_booking(year, month, day, time, table):
     """
-    Si request.method == 'GET': Muestra un formulario far introducir
+    Si request.method == 'GET': Muestra un formulario para introducir
      los datos para crear una nueva reserva.
     Si request.method == 'POST': Crea una nueva reserva.
     """
@@ -120,6 +120,30 @@ def create_booking(year, month, day, time, table):
                                time_slot=time_slot,
                                table=ping_pong_table)
 
+
+@app.route('/bookings/delete/<int:pk>.html',
+           methods=['GET', 'POST'])
+def delete_booking(pk):
+    """
+    Si request.method == 'GET': Muestra un resumen de la reserva
+     a cancelar.
+    Si request.method == 'POST': Elimina la reserva correspondiente
+     la clave primaria pk.
+    """
+    booking_store = BookingStore(g.db_con)
+    booking = booking_store.get_booking_by_pk(pk)
+
+    if request.method == 'POST':
+        booking_store.delete_booking(pk)
+        day_date = booking.time_slot.week_day.date
+        url = url_for('list_bookings',
+                      year=day_date.year,
+                      month=day_date.month,
+                      day=day_date.day)
+        return redirect(url)
+    else:
+        return render_template('delete_booking.html',
+                               booking=booking)
 
 @app.before_request
 def load_db_connection():

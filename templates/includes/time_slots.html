@@ -14,7 +14,8 @@
                         <td>
                             {% if time_slot_data.booking %}
                                 <a class="btn btn-block btn-danger "
-                                   href="#">
+                                   href="{{ url_for('delete_booking',
+                                                    pk=time_slot_data.booking.pk) }}">
                                     {{ time_slot }}
                                 </a>
                             {% else %}

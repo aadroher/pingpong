@@ -14,7 +14,7 @@
                         </label>
                         <div class="col-xs-9">
                             <p class="form-control-static">
-                                {{ booking.time_slot.day }}
+                                {{ booking.time_slot.week_day }}
                             </p>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         </label>
                         <div class="col-xs-9">
                             <p class="form-control-static">
-                                {{ booking.tennis_table }}
+                                {{ booking.ping_pong_table }}
                             </p>
                         </div>
                     </div>
@@ -69,20 +69,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-xs-offset-3 col-xs-3">
-                            {% with day=booking.time_slot.day %}
+                        <div class="col-xs-offset-3 col-xs-4">
+                            {% with day=booking.time_slot.week_day %}
                                 <a class="btn btn-default"
                                     href="{{ url_for('list_bookings',
                                             year=day.date.year,
                                             month=day.date.month,
-                                            day_num=day.date.day)
+                                            day=day.date.day)
                                         }}" >
                                     <span class="glyphicon glyphicon-arrow-left"></span>
                                     Volver
                                 </a>
                             {% endwith %}
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-4">
                             <button type="submit" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-ok"></span>
                                 Cancelar reserva

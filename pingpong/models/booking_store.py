@@ -41,6 +41,17 @@ class BookingStore:
         """
         self.db_con = db_con
 
+    def get_booking_by_pk(self, pk):
+        query_template = ("select * from {table_name} "
+                          "where {table_name}.id = {pk};")
+
+        query = query_template.format(table_name=self.db_table_name, pk=pk)
+        cursor = self.db_con.cursor()
+        cursor.execute(query)
+        row = cursor.fetchone()
+        booking = self.build_booking_from_row(row)
+        return booking
+
     def get_bookings(self, day):
         """
         :param day: Una instancia de Day.
@@ -107,3 +118,10 @@ class BookingStore:
         cursor.execute(query_template, values)
         self.db_con.commit()
 
+    def delete_booking(self, pk):
+        query_template = ("delete from {table_name} "
+                          "where {table_name}.id = ?;"
+                          ).format(table_name=self.db_table_name)
+        cursor = self.db_con.cursor()
+        cursor.execute(query_template, (pk,))
+        return self.db_con.commit()
