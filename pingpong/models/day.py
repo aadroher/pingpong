@@ -1,5 +1,5 @@
 
-from datetime import time
+from datetime import time, datetime
 
 from .time_slot import TimeSlot
 
@@ -40,6 +40,18 @@ class Day:
         return [TimeSlot(self, time(hour=n))
                 for n in range(self.start_time_hour,
                                self.end_time_hour)]
+
+    def get_time_slot(self, time_str):
+        """
+        :param time_str: Una string especificando una hora del día
+         mediante el patrón TimeSlot.time_url_pattern.
+        :return: Una instancia de TimeSlot correspondiente a la
+         hora del día suministrada y perteneciente a esta instancia
+         de Day.
+        """
+        start_time = datetime.strptime(time_str,
+                                       TimeSlot.time_url_pattern)
+        return TimeSlot(self, start_time)
 
     def __str__(self):
         return self.date.strftime("%d/%m/%Y")

@@ -10,11 +10,15 @@
         <tbody>
             {% for time_slot in day.time_slots %}
             <tr>
-                <td class="success">
-                    {{ time_slot }}
-                    <a href="#" class="btn btn-primary btn-xs pull-right">
-                        <span class="glyphicon glyphicon-ok small">
-                        </span>
+                <td>
+                    <a class="btn btn-success btn-block"
+                       href="{{ url_for('create_booking',
+                                    year=day.date.year,
+                                    month=day.date.month,
+                                    day=day.date.day,
+                                    time=time_slot.time_url_str,
+                                    table=table.url_name) }}">
+                        {{ time_slot }}
                     </a>
                 </td>
             </tr>
