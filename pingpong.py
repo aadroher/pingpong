@@ -12,7 +12,7 @@ from pingpong.models.ping_pong_tables import (
     get_ping_pong_table
 )
 from pingpong.models.booking import Booking
-from pingpong.models.booking_store import BookingStore
+from pingpong.models.booking_store import BookingStore, get_booking
 from pingpong.models.booker import Booker
 
 # Creación del objeto aplicación
@@ -51,9 +51,34 @@ def list_bookings(year, month, day):
     day_date = date(year, month, day)
     day_week = week.from_date(day_date)
     day = Day(day_week, day_date)
+    ping_pong_tables = get_ping_pong_tables()
+    booking_store = BookingStore(g.db_con)
+    bookings = booking_store.get_bookings(day)
+
+    ping_pong_tables_data = [{
+                                 'ping_pong_table': ping_pong_table,
+                                 'time_slots': [
+                                     {
+                                         'time_slot': time_slot,
+                                         'booking': get_booking(time_slot,
+                                                                ping_pong_table,
+                                                                bookings)
+                                     }
+                                     for time_slot in day.time_slots
+                                 ]
+                             }
+                             for ping_pong_table in ping_pong_tables]
+
+    # import pprint; pprint.pprint(ping_pong_tables_data)
+    view_data = {
+        'day_data': {
+            'day': day,
+            'tennis_tables_data': ping_pong_tables_data
+        }
+    }
+
     return render_template('list_bookings.html',
-                           day=day,
-                           ping_pong_tables=get_ping_pong_tables())
+                           view_data=view_data)
 
 
 @app.route('/bookings/<int:year>/<int:month>/<int:day>/<time>/<table>.html',
@@ -72,6 +97,7 @@ def create_booking(year, month, day, time, table):
     ping_pong_table = get_ping_pong_table(table)
 
     if request.method == 'POST':
+
         booker = Booker(
             request.form['booking_booker_name'],
             request.form['booking_booker_email']
@@ -102,6 +128,7 @@ def load_db_connection():
     guarda en la lista de variables globales.
     """
     g.db_con = sqlite3.connect(DB)
+    g.db_con.row_factory = sqlite3.Row
 
 
 @app.teardown_request

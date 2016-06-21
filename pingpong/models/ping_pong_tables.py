@@ -11,6 +11,10 @@ def get_ping_pong_tables():
 
 
 def get_ping_pong_table(name):
+    """
+    :param name: Un nombre de mesa de ping pong.
+    :return: La mesa cuyo nombre es igual a name.
+    """
     return next(ping_pong_table for ping_pong_table in get_ping_pong_tables()
                 if ping_pong_table.name == name.upper())
 
@@ -33,4 +37,8 @@ class PingPongTable:
          fragmento de URL que corresponde a esta tabla.
         """
         return str(self).lower()
+
+    def __eq__(self, other):
+        return self.name == other.name
+
 

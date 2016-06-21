@@ -1,3 +1,5 @@
+from datetime import datetime
+
 
 class TimeSlot:
     """
@@ -31,5 +33,16 @@ class TimeSlot:
         """
         return self.start_time.strftime(self.time_url_pattern)
 
+    @property
+    def isoformat(self):
+        """
+        :return: La representación del instante de inicio del
+         intervalo en una string que sigue el formato ISO 8601.
+         Ver https://docs.python.org/3.5/library/datetime.html.
+        """
+        time_slot_datetime = datetime.combine(self.week_day.date,
+                                              self.start_time)
+        return time_slot_datetime.isoformat()
+
     def __eq__(self, other):
-        return self.day == other.day and self.start_time == other.start_time
+        return self.isoformat == other.isoformat

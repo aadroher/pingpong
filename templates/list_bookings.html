@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
+    {% with day = view_data.day_data.day %}
     <div class="row">
         <div class="col-xs-12">
             <h4>
@@ -20,8 +21,11 @@
         </div>
     </div>
     <div class="row">
-        {% for table in ping_pong_tables %}
+        {% with ping_pong_tables_data = view_data.day_data.tennis_tables_data %}
+        {% for ping_pong_table_data in ping_pong_tables_data %}
              {% include "includes/time_slots.html" %}
         {% endfor %}
+        {% endwith %}
     </div>
+    {% endwith %}
 {% endblock %}

@@ -32,6 +32,14 @@ class Day:
         return self.week_day_codes[self.date.weekday()]
 
     @property
+    def first_time_slot(self):
+        return self.time_slots[0]
+
+    @property
+    def last_time_slot(self):
+        return self.time_slots[-1]
+
+    @property
     def time_slots(self):
         """
         :return: Una lista de instancias de TimeSlot que

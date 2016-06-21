@@ -10,8 +10,11 @@ class Booking:
                  time_slot,
                  ping_pong_table,
                  booker,
-                 notes):
+                 notes,
+                 pk=None):
         """
+        :param booking_store: Una instancia de BookingStore que
+         representa donde se guardan las reservas.
         :param time_slot: Una instancia de TimeSlot que representa
          el intervalo de tiempo a la que se asigna la reserva.
         :param ping_pong_table: Una instancia de PingPongTable a la
@@ -19,11 +22,14 @@ class Booking:
         :param booker: Una instancia de Booker que representa la
          persona que realiza esta reserva.
         :param notes: Una string con notas adicionales opcionales.
+        :param pk: Un número entero correspondiente a la clave
+         primaria que identifica esta reserva en BookingStore.
         """
         self.time_slot = time_slot
-        self.tennis_table = ping_pong_table
+        self.ping_pong_table = ping_pong_table
         self.booker = booker
         self.notes = notes
+        self.pk = pk
 
     @property
     def start_datetime_str(self):
@@ -39,4 +45,3 @@ class Booking:
                                   hour=self.time_slot.start_time.hour,
                                   minute=self.time_slot.start_time.minute)
         return start_datetime.isoformat()
-
