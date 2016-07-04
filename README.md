@@ -6,5 +6,5 @@ todavía pendiente de publicación.
 
 #### EN
 
-**ping~pong** is a example application for the secondary education textbook _Tecnologías de la Información y la Comunicación II_,
+**ping~pong** is an example application for the secondary education textbook _Tecnologías de la Información y la Comunicación II_,
 whose publication is still pending.
