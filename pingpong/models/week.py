@@ -38,8 +38,11 @@ class Week:
          correcto y empezando por el lunes.
         """
         week_day_indexes = list(range(1, 7)) + [0]
-        week_dates = [date_from_nums(self.year, self.week_num, week_day_index)
+        week_dates = [date_from_nums(self.year,
+                                     self.week_num,
+                                     week_day_index)
                       for week_day_index in week_day_indexes]
+
         return [Day(self, week_date) for week_date in week_dates]
 
     @property

@@ -46,3 +46,4 @@ class TimeSlot:
 
     def __eq__(self, other):
         return self.isoformat == other.isoformat
+

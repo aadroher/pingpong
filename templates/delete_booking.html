@@ -73,9 +73,9 @@
                             {% with day=booking.time_slot.week_day %}
                                 <a class="btn btn-default"
                                     href="{{ url_for('list_bookings',
-                                            year=day.date.year,
-                                            month=day.date.month,
-                                            day=day.date.day)
+                                            year_num=day.date.year,
+                                            month_num=day.date.month,
+                                            day_num=day.date.day)
                                         }}" >
                                     <span class="glyphicon glyphicon-arrow-left"></span>
                                     Volver

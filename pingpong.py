@@ -42,15 +42,16 @@ def home():
                          today_date.day)
 
 
-@app.route('/bookings/<int:year>/<int:month>/<int:day>.html')
-def list_bookings(year, month, day):
+@app.route('/bookings/<int:year_num>/<int:month_num>/<int:day_num>.html')
+def list_bookings(year_num, month_num, day_num):
     """
     Obtiene el día correspondiente a los parámetros definidos
     en la URL.
     """
-    day_date = date(year, month, day)
+    day_date = date(year_num, month_num, day_num)
     day_week = week.from_date(day_date)
     day = Day(day_week, day_date)
+
     ping_pong_tables = get_ping_pong_tables()
     booking_store = BookingStore(g.db_con)
     bookings = booking_store.get_bookings(day)
@@ -65,11 +66,10 @@ def list_bookings(year, month, day):
                                                                 bookings)
                                      }
                                      for time_slot in day.time_slots
-                                 ]
+                                     ]
                              }
                              for ping_pong_table in ping_pong_tables]
 
-    # import pprint; pprint.pprint(ping_pong_tables_data)
     view_data = {
         'day_data': {
             'day': day,
@@ -81,16 +81,16 @@ def list_bookings(year, month, day):
                            view_data=view_data)
 
 
-@app.route('/bookings/<int:year>/<int:month>/<int:day>/<time>/<table>.html',
+@app.route('/bookings/<int:year_num>/<int:month_num>/<int:day_num>/<time>/<table>.html',
            methods=['GET', 'POST'])
-def create_booking(year, month, day, time, table):
+def create_booking(year_num, month_num, day_num, time, table):
     """
     Si request.method == 'GET': Muestra un formulario para introducir
      los datos para crear una nueva reserva.
     Si request.method == 'POST': Crea una nueva reserva.
     """
 
-    day_date = date(year, month, day)
+    day_date = date(year_num, month_num, day_num)
     day_week = week.from_date(day_date)
     day = Day(day_week, day_date)
     time_slot = day.get_time_slot(time)
@@ -111,9 +111,9 @@ def create_booking(year, month, day, time, table):
         booking_store = BookingStore(g.db_con)
         booking_store.save_booking(booking)
         url = url_for('list_bookings',
-                      year=year,
-                      month=month,
-                      day=day.date.day)
+                      year_num=year_num,
+                      month_num=month_num,
+                      day_num=day.date.day)
         return redirect(url)
     else:
         return render_template('create_booking.html',
@@ -137,9 +137,9 @@ def delete_booking(pk):
         booking_store.delete_booking(pk)
         day_date = booking.time_slot.week_day.date
         url = url_for('list_bookings',
-                      year=day_date.year,
-                      month=day_date.month,
-                      day=day_date.day)
+                      year_num=day_date.year,
+                      month_num=day_date.month,
+                      day_num=day_date.day)
         return redirect(url)
     else:
         return render_template('delete_booking.html',

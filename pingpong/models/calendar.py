@@ -24,6 +24,7 @@ def current_week():
     week_num = datetime.now().strftime("%W")
     return int(week_num)
 
+
 def date_from_nums(year, week, week_day):
     """
     Genera un objeto datetime.date a partir de los
