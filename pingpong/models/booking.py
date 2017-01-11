@@ -45,3 +45,4 @@ class Booking:
                                   hour=self.time_slot.start_time.hour,
                                   minute=self.time_slot.start_time.minute)
         return start_datetime.isoformat()
+

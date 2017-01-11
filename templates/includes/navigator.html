@@ -3,10 +3,10 @@
         <li>
             {% with prev_day=day.week.prev_day  %}
                 <a href="{{ url_for('list_bookings',
-                                    year=prev_day.date.year,
-                                    month=prev_day.date.month,
-                                    day=prev_day.date.day)
-                        }}" aria-label="Previous">
+                                    year_num=prev_day.date.year,
+                                    month_num=prev_day.date.month,
+                                    day_num=prev_day.date.day)
+                        }}">
                     <span>&laquo;</span>
                 </a>
             {% endwith %}
@@ -14,9 +14,9 @@
         {% for week_day in day.week.days %}
             <li class="{{ 'active' if week_day == day }}">
                 <a href="{{ url_for('list_bookings',
-                                    year=week_day.date.year,
-                                    month=week_day.date.month,
-                                    day=week_day.date.day)
+                                    year_num=week_day.date.year,
+                                    month_num=week_day.date.month,
+                                    day_num=week_day.date.day)
                         }}">
                     {{ week_day.code }}
                 </a>
@@ -25,10 +25,10 @@
         <li>
             {% with next_day=day.week.next_day  %}
                 <a href="{{ url_for('list_bookings',
-                                    year=next_day.date.year,
-                                    month=next_day.date.month,
-                                    day=next_day.date.day)
-                        }}" aria-label="Previous">
+                                    year_num=next_day.date.year,
+                                    month_num=next_day.date.month,
+                                    day_num=next_day.date.day)
+                        }}">
                     <span>&raquo;</span>
                 </a>
             {% endwith %}
